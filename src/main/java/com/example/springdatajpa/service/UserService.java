@@ -1,6 +1,8 @@
 package com.example.springdatajpa.service;
 
+import com.example.springdatajpa.dao.ProductRepository;
 import com.example.springdatajpa.dao.UserRepository;
+import com.example.springdatajpa.dto.OrderReport;
 import com.example.springdatajpa.model.Product;
 import com.example.springdatajpa.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +19,37 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ProductRepository productRepository;
+
     @PostConstruct
     public void initDB(){
         List<User> users = new ArrayList<>();
-        Product product1 = new Product(100,"computer");
-        Product product2 = new Product(102,"bat");
-        Product product3 = new Product(104,"draw board");
-        Product product4 = new Product(101,"blazer");
-        Product product5 = new Product(106,"laptop");
-        Product product6 = new Product(109,"mobile");
-        Product product7 = new Product(111,"camera");
-        Product product8 = new Product(105,"clothes");
 
         List<Product> productList = new ArrayList<>();
-        productList.add(product1);
-        productList.add(product4);
+        productList.add(new Product(109,"head phones"));
+        productList.add(new Product(110,"ear phones"));
         users.add(new User(1,"mustafa","software engineer",25,productList));
-        List<Product> productList1 = new ArrayList<>();
-        productList.add(product1);
-        productList.add(product4);
-        productList.add(product5);
-        users.add(new User(2,"kavan","cricket player",24,productList1));
-        productList.remove(product1);
-        users.add(new User(3,"sam curran","chess player",23,productList));
-        users.add(new User(4,"mangaldeep","civil engineer",55,productList));
-        productList.add(product7);
-        users.add(new User(5,"tony","Teacher",45,productList));
-        productList.add(product5);
-        users.add(new User(6,"alwas","Lawyer",35,productList));
+
+        List<Product> productList2 = new ArrayList<>();
+        productList2.add(new Product(101,"blazer"));
+        productList2.add(new Product(100,"computer"));
+        users.add(new User(2,"kavan","cricket player",24,productList2));
+        List<Product> productList3 = new ArrayList<>();
+        productList3.add(new Product(102,"washing machine"));
+        productList3.add(new Product(103,"draw board"));
+        users.add(new User(3,"sam curran","chess player",23,productList3));
+        List<Product> productList4 = new ArrayList<>();
+        productList4.add(new Product(104,"Refrigirator"));
+        productList4.add(new Product(105,"laptop"));
+        users.add(new User(4,"mangaldeep","civil engineer",55,productList4));
+        List<Product> productList5 = new ArrayList<>();
+        productList5.add(new Product(106,"bat"));
+        productList5.add(new Product(107,"Mobile"));
+        users.add(new User(5,"tony","Teacher",45,productList5));
+        List<Product> productList6 = new ArrayList<>();
+        productList6.add(new Product(108,"Television"));
+        users.add(new User(6,"alwas","Lawyer",35,productList6));
         userRepository.saveAll(users);
     }
 
@@ -79,5 +84,9 @@ public class UserService {
 
     public List<User> getUsersCustomQuery(){
         return userRepository.getUsersCustomQuery();
+    }
+
+    public List<OrderReport> getAllOrderReports(String name){
+        return userRepository.getAllOrderReports(name);
     }
 }

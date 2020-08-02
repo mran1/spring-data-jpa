@@ -1,7 +1,9 @@
 package com.example.springdatajpa.controller;
 
+import com.example.springdatajpa.dto.OrderReport;
 import com.example.springdatajpa.model.User;
 import com.example.springdatajpa.service.UserService;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +54,10 @@ public class UserController {
     @GetMapping("/getUsersByCustomQuery")
     public List<User> getUsersBySort(){
         return userService.getUsersCustomQuery();
+    }
+
+    @GetMapping("/getAllOrderReports/{name}")
+    public List<OrderReport> getAllOrderReport(@PathVariable String name){
+        return userService.getAllOrderReports(name);
     }
 }
